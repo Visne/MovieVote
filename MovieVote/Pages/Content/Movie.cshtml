@@ -1,0 +1,20 @@
+﻿@using MovieVote.Extensions
+@model Movie
+<div class="movie">
+    <div class="upvote">
+        <img class="upvote-button" src="images/upvote.svg" alt="Upvote button">
+        <div class="upvote-counter">0</div>
+    </div>
+    <div class="movie-box styled-box">
+        <img class="poster" src="@Model.PosterUrl.Or("images/missing.png")"
+             alt="@Model.Title.Or("Movie") poster">
+        
+        <div class="movie-title">
+            @Model.Title.Or("Unknown")
+            <span class="movie-year">(@Model.Year.Or("unknown"))</span>
+        </div>
+        <div class="movie-description">
+            @Model.Description.Or("Description missing")
+        </div>
+    </div>
+</div>
