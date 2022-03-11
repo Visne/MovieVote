@@ -9,9 +9,9 @@ public class IndexModel : PageModel
     public void OnGet()
     {
         Movies.Clear();
-        Movies.Add(new Movie("", "b", 2020, "cd"));
+        Movies.Add(new Movie("", "b", 2020, string.Empty));
         Movies.Add(new Movie("e", "f", 1999, null));
-        Movies.Add(new Movie("g", "h", null, "cdd"));
+        Movies.Add(new Movie("g", "h", null, null));
     }
 }
 
@@ -20,7 +20,7 @@ public class Movie
     public readonly string? Title;
     public readonly string? Description;
     public int? Year;
-    public string? PosterUrl;
+    public readonly string? PosterUrl;
 
     public Movie(string? title, string? description, int? year, string? posterUrl)
     {

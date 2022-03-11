@@ -6,7 +6,7 @@
     <div class="movie-list content">
         @foreach (Movie movie in IndexModel.Movies)
         {
-            @await Html.PartialAsync("Content/Movie", movie)
+            @await Html.PartialAsync("Content/Movie.cshtml", movie)
         }
     </div>
 </div>
