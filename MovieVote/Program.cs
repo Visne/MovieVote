@@ -1,9 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Primitives;
-using MovieVote.Api.Discord;
-using MovieVote.Api.Discord.Json;
+using System;
+using System.IO;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
 using MovieVote.Configuration;
 using MovieVote.Db;
 using Newtonsoft.Json;
@@ -36,12 +35,8 @@ public static class Program
         
         app.UseStaticFiles();
         app.MapRazorPages();
+        app.MapControllers();
 
-        /*app.MapGet("/oauth/discord", async context =>
-        {
-
-        });*/
-        
         Database.InitializeDb();
 
         app.Run();
