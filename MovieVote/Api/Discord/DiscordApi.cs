@@ -7,7 +7,7 @@ namespace MovieVote.Api.Discord;
 public static class DiscordApi
 {
     /// <summary>
-    ///     Get a Discord OAuth access token from a code.
+    ///     Get a Discord OAuth access token from a code. a
     /// </summary>
     /// <exception cref="ApiException"></exception>
     [Pure]
