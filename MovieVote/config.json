@@ -1,9 +1,0 @@
-﻿{
-    "port": 2000,
-    "database": "database.db",
-    "discord": {
-        "client_id": "946869562807312444",
-        "client_secret": "HNr3RXLJwchfgIgyUfkpErotKaEDAKVK",
-        "redirect_uri": "http://localhost:2000/oauth/discord",
-    },
-}

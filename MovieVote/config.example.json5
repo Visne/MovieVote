@@ -1,0 +1,13 @@
+﻿{
+    port: 2000,
+    database: "database.db",
+    discord: {
+        client_id: "",
+        client_secret: "",
+        redirect_uri: "http://localhost:2000/oauth/discord",
+    },
+    tmdb: {
+        api_key: "",
+    },
+    expiry: 180, // Session expiry in minutes (might use Discord provided expiry instead)
+}
