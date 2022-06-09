@@ -186,7 +186,7 @@ input[type=text] {
     margin-right: -12px;
 }
 
-.gh-login-button {
+.discord-login-button {
     /* Flexbox */
     display: flex;
     align-items: center;
@@ -197,7 +197,7 @@ input[type=text] {
     margin-left: auto;
 
     /* Style */
-    background-color: #000000;
+    background-color: #5865F2;
     color: #FFFFFF;
     font-weight: 600;
     text-decoration: none;
@@ -211,12 +211,16 @@ input[type=text] {
     padding: 8px 16px 8px 16px;
     gap: 8px;
     height: var(--header-button-height);
+
+    /* Style */
+    background-color: #5865F2;
+    color: #FFFFFF;
 }
 
 .logout-button {
     width: 16px;
     cursor: pointer;
-
+    
     /* Turns white svg into #f80800 */
     /* https://codepen.io/sosuke/pen/Pjoqqp, https://stackoverflow.com/a/43960991 */
     filter: invert(78%) sepia(88%) saturate(6122%) hue-rotate(356deg) brightness(88%) contrast(125%);

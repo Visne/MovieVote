@@ -1,17 +1,13 @@
-using System;
-using System.IO;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+using MovieVote.Api.Discord;
 using MovieVote.Configuration;
-using MovieVote.Db;
+using MovieVote.Middleware;
 using Newtonsoft.Json;
 
 namespace MovieVote;
 
 public static class Program
 {
-    private const string ConfigPath = "config.json";
+    private const string ConfigPath = "config.json5";
     public static readonly Config Config;
 
     static Program()
@@ -24,20 +20,16 @@ public static class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        builder.WebHost.UseUrls("http://*:" + Config.Port);
-        builder.Services.AddRazorPages();
 
-#if DEBUG
+        builder.WebHost.UseUrls("http://*:" + Config.Port);
         builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
-#endif
 
         var app = builder.Build();
         
         app.UseStaticFiles();
-        app.MapRazorPages();
         app.MapControllers();
 
-        Database.InitializeDb();
+        app.UseLogin();
 
         app.Run();
     }

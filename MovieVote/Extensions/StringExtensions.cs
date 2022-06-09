@@ -3,7 +3,7 @@
 public static class StringExtensions
 {
     /// <summary>
-    ///     Returns value if not null or empty, otherwise returns alt.
+    /// Returns value if not null or empty, otherwise returns alt.
     /// </summary>
     /// <param name="value">Value to return if it is not null or empty</param>
     /// <param name="alt">Alternative value to return if value is null or empty</param>

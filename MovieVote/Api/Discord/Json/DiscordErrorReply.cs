@@ -1,13 +1,17 @@
-﻿using System.Text.Json.Serialization;
-using JetBrains.Annotations;
+﻿using Newtonsoft.Json;
 
 namespace MovieVote.Api.Discord.Json;
 
-public class DiscordErrorReply
-{
-    [JsonPropertyName("error")]
-    public string? Error { get; [UsedImplicitly] set; }
+/// <summary>
+/// An error reply from Discord.
+/// </summary>
+/// <param name="Error">Name of the error.</param>
+/// <param name="ErrorDescription">Description of the error.</param>
+public record DiscordErrorReply
+(
+    [property: JsonProperty("error")]
+    string? Error,
 
-    [JsonPropertyName("error_description")]
-    public string? ErrorDescription { get; [UsedImplicitly] set; }
-}
+    [property: JsonProperty("error_description")]
+    string? ErrorDescription
+);

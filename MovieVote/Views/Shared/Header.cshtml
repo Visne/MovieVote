@@ -1,0 +1,27 @@
+﻿@using MovieVote.Middleware
+<div class="header">
+    <div class="header-content">
+        <a href="/"><img class="header-logo" src="~/images/bucket-logo.png" alt="Bucket Logo"></a>
+        <a class="header-button" href="/">Movies</a>
+        <a class="header-button" href="/" onclick="alert('Not implemented yet :(');">Dates</a>
+        @{
+            if (Context.Request.Cookies.ContainsKey("session") && (bool?) Context.Items[LoginItems.LoggedIn] == true)
+            {
+                <a class="header-add-button styled-box" href="/add">+</a>
+                <div class="logged-in styled-box">
+                    <img class="profile-picture" src="@Context.Items[LoginItems.Avatar]" alt="Profile picture">
+                    <span class="logged-in-as">Logged in as <b>@Context.Items[LoginItems.Name]</b></span>
+                    <img class="logout-button" src="images/logout.svg" onclick="location.href='/logout'" alt="Log out">
+                </div>
+            }
+            else
+            {
+                <a class="discord-login-button styled-box"
+                   href=@($"https://discord.com/api/oauth2/authorize?client_id={Program.Config.Discord.ClientId}&redirect_uri={Program.Config.Discord.RedirectUri}&response_type=code&scope=identify")>
+                    <img src="~/images/discord-logo.svg" alt="Discord Logo" width="24px">
+                    <div>Login with Discord</div>
+                </a>
+            }
+        }
+    </div>
+</div>

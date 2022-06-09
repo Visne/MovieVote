@@ -1,22 +1,21 @@
-﻿using System.Text.Json.Serialization;
-using JetBrains.Annotations;
+﻿using Newtonsoft.Json;
 
 namespace MovieVote.Api.Discord.Json;
 
-public class DiscordAccessTokenReply
-{
-    [JsonPropertyName("access_token")]
-    public string? AccessToken { get; [UsedImplicitly] set; }
+public record DiscordAccessTokenReply
+(
+    [property: JsonProperty("access_token", Required = Required.Always)]
+    string AccessToken,
     
-    [JsonPropertyName("expires_in")]
-    public int? ExpiresIn { get; [UsedImplicitly] set; }
+    [property: JsonProperty("expires_in", Required = Required.Always)]
+    int ExpiresIn,
     
-    [JsonPropertyName("refresh_token")]
-    public string? RefreshToken { get; [UsedImplicitly] set; }
+    [property: JsonProperty("refresh_token", Required = Required.Always)]
+    string RefreshToken,
     
-    [JsonPropertyName("scope")]
-    public string? Scope { get; [UsedImplicitly] set; }
+    [property: JsonProperty("scope", Required = Required.Always)]
+    string Scope,
     
-    [JsonPropertyName("token_type")]
-    public string? TokenType { get; [UsedImplicitly] set; }
-}
+    [property: JsonProperty("token_type", Required = Required.Always)]
+    string TokenType
+);

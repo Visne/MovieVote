@@ -1,8 +1,3 @@
-function logout(base) {
-    document.cookie = `session=; Max-Age=-1;secure;path=${base}`
-    window.location.reload();
-}
-
 function upvote(element) {
     const counter = element.parentNode.querySelector(".upvote-counter");
     const button = element.parentNode.querySelector(".upvote-button");

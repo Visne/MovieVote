@@ -1,0 +1,13 @@
+﻿@using MovieVote.Views.Shared
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IndexModel
+
+<div class="movie-content">
+    <partial name="Sidebar" />
+    <div class="movie-list content">
+        @foreach (MovieModel movie in Model.Movies)
+        {
+            @await Html.PartialAsync("Movie", movie)
+        }
+    </div>
+</div>
