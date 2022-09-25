@@ -31,6 +31,6 @@ public class User
     /// <summary>The session ID, same as the session cookie.</summary>
     public string SessionId { get; set; } = null!;
 
-    /// <summary>UNIX epoch in seconds when the cookie and database row expire.</summary>
+    /// <summary>DateTime when the cookie and database user row expire.</summary>
     public DateTime SessionExpiry { get; set; }
 }

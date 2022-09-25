@@ -23,6 +23,12 @@ public class Config
     public DiscordConfig Discord = null!;
 
     /// <summary>
+    /// The Movie Database specific configuration.
+    /// </summary>
+    [JsonProperty(PropertyName = "tmdb", Required = Required.Always)]
+    public TmdbConfig Tmdb = null!;
+
+    /// <summary>
     /// Session cookie expiry time in minutes.
     /// </summary>
     [JsonProperty(PropertyName = "expiry")]

@@ -21,13 +21,13 @@
     <meta content="https://visne.xyz/movienight/" property="og:url" />
     <meta content="/images/bucket-logo.png" property="og:image" />
     <meta content="#e23229" data-react-helmet="true" name="theme-color" />
+    
+    <!-- Scripts -->
+    <script src="~/js/index.js"></script>
 </head>
 <body>
-
-<partial name="Header"/>
-@RenderBody()
-<partial name="Footer"/>
-<script src="~/js/index.js"></script>
-
+    <partial name="Header"/>
+    @RenderBody()
+    <partial name="Footer"/>
 </body>
 </html>

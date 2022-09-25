@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Contracts;
 using System.Text.RegularExpressions;
-using MovieVote.Api.Discord.Json;
+using MovieVote.Api.Discord.Models;
 using MovieVote.Exceptions;
 using MovieVote.Extensions;
 using Newtonsoft.Json;

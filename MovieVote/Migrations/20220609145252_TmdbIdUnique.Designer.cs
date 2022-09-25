@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieVote.Db;
 
@@ -10,9 +11,10 @@ using MovieVote.Db;
 namespace MovieVote.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20220609145252_TmdbIdUnique")]
+    partial class TmdbIdUnique
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.5");
@@ -21,9 +23,6 @@ namespace MovieVote.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("AddedById")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("AddedOn")
@@ -38,7 +37,7 @@ namespace MovieVote.Migrations
                     b.Property<string>("Poster")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly?>("ReleaseDate")
+                    b.Property<DateOnly>("ReleaseDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Tagline")
@@ -48,12 +47,11 @@ namespace MovieVote.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("TmdbId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("TmdbId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AddedById");
 
                     b.HasIndex("TmdbId")
                         .IsUnique();
@@ -104,56 +102,6 @@ namespace MovieVote.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("MovieVote.Db.Vote", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("MovieId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("VoterId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VoterId");
-
-                    b.HasIndex("MovieId", "VoterId")
-                        .IsUnique();
-
-                    b.ToTable("Votes");
-                });
-
-            modelBuilder.Entity("MovieVote.Db.Movie", b =>
-                {
-                    b.HasOne("MovieVote.Db.User", "AddedBy")
-                        .WithMany()
-                        .HasForeignKey("AddedById");
-
-                    b.Navigation("AddedBy");
-                });
-
-            modelBuilder.Entity("MovieVote.Db.Vote", b =>
-                {
-                    b.HasOne("MovieVote.Db.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MovieVote.Db.User", "Voter")
-                        .WithMany()
-                        .HasForeignKey("VoterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Movie");
-
-                    b.Navigation("Voter");
                 });
 #pragma warning restore 612, 618
         }

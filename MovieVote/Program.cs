@@ -1,5 +1,5 @@
-using MovieVote.Api.Discord;
 using MovieVote.Configuration;
+using MovieVote.Db;
 using MovieVote.Middleware;
 using Newtonsoft.Json;
 
@@ -23,11 +23,13 @@ public static class Program
 
         builder.WebHost.UseUrls("http://*:" + Config.Port);
         builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+        builder.Services.AddDbContext<DatabaseContext>();
 
         var app = builder.Build();
         
         app.UseStaticFiles();
         app.MapControllers();
+        app.UseWebSockets(new WebSocketOptions { KeepAliveInterval = TimeSpan.FromMinutes(1)  });
 
         app.UseLogin();
 

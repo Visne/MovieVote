@@ -5,10 +5,12 @@ namespace MovieVote.Middleware;
 public class LoginMiddleware
 {
     private readonly RequestDelegate _next;
+    private readonly DatabaseContext _ctx;
 
-    public LoginMiddleware(RequestDelegate next)
+    public LoginMiddleware(RequestDelegate next, DatabaseContext ctx)
     {
         _next = next;
+        _ctx = ctx;
     }
 
     public async Task InvokeAsync(HttpContext context)
@@ -20,7 +22,7 @@ public class LoginMiddleware
             return;
         }
 
-        var data = Database.GetStoredUserData(sessionId);
+        var data = _ctx.GetStoredUserData(sessionId);
 
         if (data == null)
         {

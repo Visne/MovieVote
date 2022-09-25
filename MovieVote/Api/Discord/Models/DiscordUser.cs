@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace MovieVote.Api.Discord.Json;
+namespace MovieVote.Api.Discord.Models;
 
 /// <summary>
 /// Discord user data.

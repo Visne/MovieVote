@@ -1,4 +1,5 @@
-﻿{
+﻿// Rename to config.json5 and edit
+{
     port: 2000,
     database: "database.db",
     discord: {

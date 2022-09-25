@@ -1,13 +1,22 @@
-﻿@using MovieVote.Views.Shared
-@using Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using MovieVote.Db
 @model IndexModel
 
 <div class="movie-content">
     <partial name="Sidebar" />
     <div class="movie-list content">
-        @foreach (MovieModel movie in Model.Movies)
-        {
-            @await Html.PartialAsync("Movie", movie)
+        @{
+            if (Model.Movies.Count == 0)
+            {
+                <div style="text-align: center; color: dimgray"><i>There's nothing here...</i></div>
+            }
+            else
+            {
+                foreach (Movie movie in Model.Movies)
+                {
+                    @await Html.PartialAsync("Movie", movie)
+                }
+            }
         }
     </div>
 </div>

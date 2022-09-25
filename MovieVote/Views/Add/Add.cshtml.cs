@@ -1,10 +1,19 @@
-using MovieVote.Views.Shared;
+using MovieVote.Db;
 
 namespace MovieVote.Views.Add;
 
 public class AddModel
 {
     public (bool Success, string Reason)? Result;
-    public string? Id;
-    public MovieModel? Movie;
+    public int? Id;
+    public Movie? Movie;
+
+    public AddModel()
+    {
+    }
+
+    public AddModel((bool Success, string Reason)? result)
+    {
+        Result = result;
+    }
 }

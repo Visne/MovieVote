@@ -1,8 +1,13 @@
-using MovieVote.Views.Shared;
+using MovieVote.Db;
 
 namespace MovieVote.Views.Index;
 
 public class IndexModel
 {
-    public readonly List<MovieModel> Movies = new();
+    public List<Movie> Movies;
+    
+    public IndexModel(List<Movie> movies)
+    {
+        Movies = movies;
+    }
 }

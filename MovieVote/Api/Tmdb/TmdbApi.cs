@@ -1,42 +1,53 @@
-using MovieVote.Exceptions;
+using System.Net;
+using JetBrains.Annotations;
+using MovieVote.Api.Tmdb.Models;
 using Newtonsoft.Json;
+using MovieVote.Extensions;
 
 namespace MovieVote.Api.Tmdb;
 
 public static class TmdbApi
 {
-    public static async void GetMovieDetails(int id)
+    [MustUseReturnValue]
+    public static async Task<TmdbMovieReply?> GetMovieDetails(int id)
     {
         using var client = new HttpClient();
 
         // Send code to request access token
         var resp = await client.SendAsync(new HttpRequestMessage
         {
-            Method = HttpMethod.Post,
+            Method = HttpMethod.Get,
             RequestUri = new Uri($"https://api.themoviedb.org/3/movie/{id}"),
             Headers =
             {
-                //{ "Authorization", Program.Config.Tmdb.ApiKey },
+                { "Authorization", $"Bearer {Program.Config.Tmdb.ApiKey}" },
             },
         });
 
+        if (resp.StatusCode == HttpStatusCode.NotFound)
+        {
+            return null;
+        }
+
         if (!resp.IsSuccessStatusCode)
         {
-            Console.WriteLine("Something went wrong while getting token:");
-            /*var errorReply = await new JsonSerializer().Deserialize<DiscordErrorReply>(resp.Content);
+            var reply = await new JsonSerializer().Deserialize<TmdbErrorReply>(resp.Content);
 
-            if (errorReply == null)
+            if (reply == null)
             {
-                throw new ApiException("Failed to deserialize an error:\n" + resp.Content.ReadAsStringAsync().Result);
-            }*/
+                throw new Exception($"Failed to deserialize an error:\n{resp.Content.ReadAsStringAsync().Result}");
+            }
             
-            throw new ApiException($"Failed to get movie details.");
+            throw new Exception($"{reply.StatusCode}: {reply.StatusMessage}");
         }
-        
-        //var tokenReply = await new JsonSerializer().Deserialize<dynamic>(resp.Content);
 
-        
+        var movie = await new JsonSerializer().Deserialize<TmdbMovieReply>(resp.Content);
 
-        //return tokenReply;
+        if (movie == null)
+        {
+            throw new Exception($"Failed to deserialzie movie reply:\n{resp.Content.ReadAsStringAsync().Result}");
+        }
+
+        return movie;
     }
 }

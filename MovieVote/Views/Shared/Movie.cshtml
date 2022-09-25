@@ -1,22 +1,32 @@
-﻿@model MovieModel
+﻿@model MovieVote.Db.Movie
 @using MovieVote.Extensions
-<div class="movie">
-    <div class="upvote">
-        <img class="upvote-button" src="/images/upvote.svg" alt="Upvote button">
-        <div class="upvote-counter">0</div>
-    </div>
+<div class="movie" id="@Model.Id">
+    @if (ViewBag.HideUpvote is null or false)
+    {
+        <div class="upvote">
+            <img class="upvote-button" src="/images/upvote.svg" alt="Upvote button" onclick="upvote(this.parentElement.parentElement)">
+            <div class="upvote-counter">0</div>
+        </div>
+    }
     <div class="movie-box styled-box">
-        <img class="poster" src="@Model.PosterUrl.Or("images/missing.png")"
+        <img class="poster" src="@Model.Poster.Or("images/missing.png")"
              alt="@Model.Title.Or("Movie") poster">
-        
+
         <div class="movie-title">
             @Model.Title.Or("Unknown")
-            <span class="movie-year">(@Model.Year.Or("unknown"))</span>
+            @if (Model.ReleaseDate != null)
+            {
+                <span class="movie-year">(@Model.ReleaseDate.Value.Year)</span>
+            }
+            else
+            {
+                <span class="movie-year">(unknown)</span>
+            }
         </div>
         <div class="movie-description">
-            @if (Model.Description != null)
+            @if (Model.Overview != null)
             {
-                @Model.Description
+                @Model.Overview
             }
             else
             {

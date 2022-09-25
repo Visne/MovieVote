@@ -223,9 +223,9 @@ div.filter.closed div.filter-toggle img.filter-chevron {
 }
 
 /*noinspection CssUnusedSymbol*/
-div.upvoted {
+/*div.upvoted {
     color: var(--accent-color);
-}
+}*/
 
 /*noinspection CssUnusedSymbol*/
 img.upvoted {
