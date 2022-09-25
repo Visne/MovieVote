@@ -8,3 +8,7 @@ riderModule.iml
 /MovieVote/database.db-shm
 /MovieVote/database.db-wal
 /MovieVote/config.json5
+/MovieVote/wwwroot/lib/microsoft-signalr/signalr.js
+/MovieVote/wwwroot/lib/microsoft-signalr/signalr.min.js
+/MovieVote/wwwroot/js/index.js
+/MovieVote/wwwroot/js/index.js.map
