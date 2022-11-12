@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@microsoft/signalr": "^6.0.9",
+    "@types/node": "^18.7.23",
+    "esbuild": "^0.15.10",
+    "rimraf": "^3.0.2"
+  },
+  "scripts": {
+    "clean": "rimraf ../Static/js",
+    "buildDebug": "esbuild index.ts --define:DEBUG=true --bundle --sourcemap --outfile=../Static/js/index.js",
+    "buildRelease": "esbuild index.ts --define:DEBUG=false --bundle --minify --outfile=../Static/js/index.js"
+  }
+}

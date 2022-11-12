@@ -19,17 +19,22 @@ public static class Program
     
     public static void Main(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
+        var builder = WebApplication.CreateBuilder(new WebApplicationOptions
+        {
+            WebRootPath = "Static",
+            Args = args,
+        });
 
         builder.WebHost.UseUrls("http://*:" + Config.Port);
         builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
         builder.Services.AddDbContext<DatabaseContext>();
+        builder.Services.AddSingleton(Config);
 
         var app = builder.Build();
         
         app.UseStaticFiles();
         app.MapControllers();
-        app.UseWebSockets(new WebSocketOptions { KeepAliveInterval = TimeSpan.FromMinutes(1)  });
+        app.UseWebSockets(new WebSocketOptions { KeepAliveInterval = TimeSpan.FromMinutes(1) });
 
         app.UseLogin();
 

@@ -1,4 +1,4 @@
-const ENDPOINT: string = `${location.protocol.replace(/^http/, "ws")}//${location.host}/vote`;
+/*const ENDPOINT: string = `${location.protocol.replace(/^http/, "ws")}//${location.host}/vote`;
 let ws: WebSocket = new WebSocket(ENDPOINT);
 
 ws.onmessage = (e: MessageEvent) => {
@@ -23,7 +23,19 @@ ws.onmessage = (e: MessageEvent) => {
     }
     
     return false;
-}
+}*/
+
+import * as signalR from "@microsoft/signalr";
+
+// This value should be set by esbuild with --define, to differentiate between debug/release builds.
+// If the value is not set it will default to false.
+// @ts-expect-error
+const isDebug = typeof DEBUG !== 'undefined' && DEBUG;
+
+const connection = new signalR.HubConnectionBuilder()
+    .withUrl("/chathub")
+    .configureLogging(isDebug ? signalR.LogLevel.Debug : signalR.LogLevel.Error)
+    .build();
 
 async function upvote(movie: HTMLDivElement): Promise<void> {
     const vote: HTMLDivElement | null = movie.querySelector(".upvote");
@@ -36,7 +48,7 @@ async function upvote(movie: HTMLDivElement): Promise<void> {
         return;
     }
     
-    // TODO: Add toast
+    /*// TODO: Add toast
     switch (ws.readyState) {
         case WebSocket.CONNECTING:
             console.log("WebSocket is still connecting, please retry.");
@@ -45,7 +57,7 @@ async function upvote(movie: HTMLDivElement): Promise<void> {
         case WebSocket.CLOSED:
             console.log("WebSocket is closed, please reload the page.");
             return;
-    }
+    }*/
     
     let sessionId: string | null = getCookie("session");
     
@@ -55,19 +67,20 @@ async function upvote(movie: HTMLDivElement): Promise<void> {
         return;
     }
     
+    /*
     let msg = {
         m: id, // Movie ID
         s: sessionId, // Session ID
-    }
+    }*/
 
     if (!button.classList.contains("upvoted")) {
         button.classList.add("upvoted");
         incrementCounter(counter);
-        ws.send(JSON.stringify({ u: true, ...msg }));
+        //ws.send(JSON.stringify({ u: true, ...msg }));
     } else {
         button.classList.remove("upvoted");
         decrementCounter(counter);
-        ws.send(JSON.stringify({ u: false, ...msg }));
+        //ws.send(JSON.stringify({ u: false, ...msg }));
     }
 }
 
@@ -86,8 +99,4 @@ function decrementCounter(counter: HTMLElement): void {
 function getCookie(name: string): string | null {
     const match = document.cookie.match(RegExp(`(?:^|;\\s*)${name}=([^;]*)`));
     return match ? match[1] : null;
-}
-
-function toggleOpen(element: HTMLDivElement): void {
-    element.classList.toggle('closed');
 }

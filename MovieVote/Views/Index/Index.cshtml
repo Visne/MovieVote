@@ -3,7 +3,11 @@
 @model IndexModel
 
 <div class="movie-content">
-    <partial name="Sidebar" />
+    <div class="sidebar">
+        <partial name="Filter" model='new FilterModel("Sort By", "wyci")' />
+        <partial name="Filter" model='new FilterModel("Watch Status", "wyci")' />
+        <partial name="Filter" model='new FilterModel("Genre", "wyci")' />
+    </div>
     <div class="movie-list content">
         @{
             if (Model.Movies.Count == 0)
@@ -14,7 +18,7 @@
             {
                 foreach (Movie movie in Model.Movies)
                 {
-                    @await Html.PartialAsync("Movie", movie)
+                    <partial name="Movie" model="movie"/>
                 }
             }
         }

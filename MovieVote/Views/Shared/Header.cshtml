@@ -1,4 +1,7 @@
 ﻿@using MovieVote.Middleware
+@using MovieVote.Configuration
+@inject Config Config
+
 <div class="header">
     <div class="header-content">
         <a href="/"><img class="header-logo" src="~/images/bucket-logo.png" alt="Bucket Logo"></a>
@@ -17,7 +20,7 @@
             else
             {
                 <a class="discord-login-button styled-box"
-                   href=@($"https://discord.com/api/oauth2/authorize?client_id={Program.Config.Discord.ClientId}&redirect_uri={Program.Config.Discord.RedirectUri}&response_type=code&scope=identify")>
+                   href=@($"https://discord.com/api/oauth2/authorize?client_id={Config.Discord.ClientId}&redirect_uri={Config.Discord.RedirectUri}&response_type=code&scope=identify")>
                     <img src="~/images/discord-logo.svg" alt="Discord Logo" width="24px">
                     <div>Login with Discord</div>
                 </a>

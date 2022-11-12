@@ -8,7 +8,7 @@ public class DiscordConfig
     /// Discord application Client ID.
     /// </summary>
     [JsonProperty(PropertyName = "client_id", Required = Required.Always)]
-    public string ClientId =  null!;
+    public string ClientId = null!;
 
     /// <summary>
     /// Discord application Client Secret.
